@@ -19,8 +19,8 @@ function Nebula:CreateWindow(props)
     
     -- Main Frame
     self.MainFrame = Instance.new("Frame")
-    self.MainFrame.Size = UDim2.new(0, 500, 0, 300)
-    self.MainFrame.Position = UDim2.new(0.5, -250, 0.5, -150)
+    self.MainFrame.Size = UDim2.new(0, 500, 0, 350) -- increased height to fit more content
+    self.MainFrame.Position = UDim2.new(0.5, -250, 0.5, -175)
     self.MainFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
     self.MainFrame.BorderSizePixel = 0
     self.MainFrame.Parent = self.Gui
@@ -96,6 +96,12 @@ function Nebula:CreateTab(name)
     Tab.Frame.BackgroundTransparency = 1
     Tab.Frame.Parent = self.MainFrame
 
+    -- Use UIListLayout for vertical spacing inside Tab
+    local UIList = Instance.new("UIListLayout")
+    UIList.Parent = Tab.Frame
+    UIList.SortOrder = Enum.SortOrder.LayoutOrder
+    UIList.Padding = UDim.new(0, 8) -- space between elements
+
     local Title = Instance.new("TextLabel")
     Title.Size = UDim2.new(1, 0, 0, 30)
     Title.Text = name
@@ -112,12 +118,13 @@ end
 function Nebula.CreateToggle(self, props)
     local Frame = Instance.new("Frame")
     Frame.Size = UDim2.new(1, -10, 0, 40)
+    Frame.Position = UDim2.new(0, 5, 0, 0)  -- slight left padding so it doesn't hug edge
     Frame.BackgroundTransparency = 1
     Frame.Parent = self.Frame
 
     local Label = Instance.new("TextLabel")
     Label.Size = UDim2.new(1, -60, 1, 0)
-    Label.Text = props.Title .. " - " .. props.Description
+    Label.Text = props.Title .. " - " .. (props.Description or "")
     Label.TextColor3 = Color3.new(1,1,1)
     Label.Font = Enum.Font.Gotham
     Label.TextSize = 14
@@ -127,7 +134,7 @@ function Nebula.CreateToggle(self, props)
 
     local ToggleFrame = Instance.new("Frame")
     ToggleFrame.Size = UDim2.new(0, 50, 0, 24)
-    ToggleFrame.Position = UDim2.new(1, -50, 0.5, -12)
+    ToggleFrame.Position = UDim2.new(1, -55, 0.5, -12) -- moved 5px more left for better margin
     ToggleFrame.BackgroundColor3 = Color3.fromRGB(150, 150, 150)
     ToggleFrame.Parent = Frame
     Instance.new("UICorner", ToggleFrame).CornerRadius = UDim.new(1, 0)
@@ -168,6 +175,7 @@ end
 function Nebula.CreateButton(self, props)
     local Btn = Instance.new("TextButton")
     Btn.Size = UDim2.new(0, 120, 0, 30)
+    Btn.Position = UDim2.new(0, 5, 0, 0)  -- added left padding for spacing
     Btn.Text = props.Title
     Btn.TextColor3 = Color3.new(1,1,1)
     Btn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
@@ -183,6 +191,7 @@ end
 function Nebula.CreateSlider(self, props)
     local Frame = Instance.new("Frame")
     Frame.Size = UDim2.new(0, 200, 0, 40)
+    Frame.Position = UDim2.new(0, 5, 0, 0) -- added left padding for spacing
     Frame.BackgroundTransparency = 1
     Frame.Parent = self.Frame
 
